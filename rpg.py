@@ -57,12 +57,69 @@ class Aventureiro:
 	#um aventureiro so pode realizar uma acao por masmorra, dps ele sai do grupo
 	#o jogo acaba quando nao existirem mais aventureiros para atacar
 
+def jogo():
+	print("Monte sua equipe para derrotar os monstros da masmorra!\n")
+	print("Selecione a dificuldade:")
+	print("<1>Fácil 	(30 aventureiros)")
+	print("<2>Médio 	(18 aventureiros)")
+	print("<3>Difícil 	(09 aventureiros)")
+	print("<4>Sair do jogo =(")
+	dif = int(input("\nEscolha entre as dificuldades 1, 2 ou 3:\n> "))
+	num_aventureiros = 18
+	if dif == 1:
+		print("Dificuldade fácil escolhida!")
+		num_aventureiros = 30
+	elif dif == 2:
+		print("Dificuldade média escolhida!")
+		num_aventureiros = 18
+	elif dif == 3:
+		print("Dificuldade difícil escolhida!")
+		num_aventureiros = 9
+	elif dif == 4:
+		exit()
+	else:
+		print("Você irá jogar com a dificuldade padrão (Médio)\n\n")
+
+	aventureiros = []
+	flag = 0
+
+	while flag == 0:
+		n_druids = int(input("Escolha a quantidade de druids da sua equipe: "))
+		if (num_aventureiros - n_druids) >= 0:
+			flag = 1
+			num_aventureiros = num_aventureiros - n_druids
+			print("Você adicionou " + str(n_druids) + " druids!")
+			while n_druids > 0:
+				druid = Druid()
+				avent = Aventureiro("druid", druid.dano, druid.tipo_dano)
+				aventureiros.append(avent)
+				n_druids -= 1
+		else:
+			print("Quantidade de druids selecionada é maior do que o seu número de aventureiros!\nDigite uma quantidade menor.")
+	
+	print("Ainda restam " + str(num_aventureiros) + " aventureiros para adicionar à sua equipe!")
+	flag = 0
+
+	while flag == 0:
+		n_mages = int(input("\nEscolha a quantidade de mage da sua equipe: "))
+		if (num_aventureiros - n_mages) >= 0:
+			flag = 1
+			num_aventureiros = num_aventureiros - n_mages
+			print("Você adicionou " + str(n_mages) + " mages!")
+			while n_mages > 0:
+				mage = Mage()
+				avent = Aventureiro("mage", mage.dano, mage.tipo_dano)
+				aventureiros.append(avent)
+				n_mages -= 1
+		else:
+			print("Quantidade de mages selecionada é maior do que o seu número de aventureiros!\nDigite uma quantidade menor.")
+	
+	print("Ainda restam " + str(num_aventureiros) + " aventureiros para adicionar à sua equipe!")
+	flag = 0
+
 def main():
-	print("JOGO EXPLORACAO MASMORRA")
-	druid = Druid()
-	avent = Aventureiro("druid", druid.dano, druid.tipo_dano)
-	print(avent.classe)
-	print(avent.dano)
-	print(avent.tipo_dano)
+	print("\n/*/*/*/* JOGO DE EXPLORACAO DA MASMORRA */*/*/*/")
+	jogo()
+	
 
 main()
