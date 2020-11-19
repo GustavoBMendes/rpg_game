@@ -58,14 +58,17 @@ class Aventureiro:
 	#o jogo acaba quando nao existirem mais aventureiros para atacar
 
 def jogo():
+
 	print("Monte sua equipe para derrotar os monstros da masmorra!\n")
 	print("Selecione a dificuldade:")
 	print("<1>Fácil 	(30 aventureiros)")
 	print("<2>Médio 	(18 aventureiros)")
 	print("<3>Difícil 	(09 aventureiros)")
 	print("<4>Sair do jogo =(")
+
 	dif = int(input("\nEscolha entre as dificuldades 1, 2 ou 3:\n> "))
 	num_aventureiros = 18
+
 	if dif == 1:
 		print("Dificuldade fácil escolhida!")
 		num_aventureiros = 30
@@ -116,6 +119,24 @@ def jogo():
 	
 	print("Ainda restam " + str(num_aventureiros) + " aventureiros para adicionar à sua equipe!")
 	flag = 0
+
+	while flag == 0:
+		n_warrior = int(input("\nEscolha a quantidade de guerreiros da sua equipe: "))
+		if (num_aventureiros - n_warrior) >= 0:
+			flag = 1
+			num_aventureiros = num_aventureiros - n_warrior
+			print("Você adicionou " + str(n_warrior) + " guerreiros!")
+			while n_warrior > 0:
+				warrior = Warrior()
+				avent = Aventureiro("warrior", warrior.dano, warrior.tipo_dano)
+				aventureiros.append(avent)
+				n_warrior -= 1
+		else:
+			print("Quantidade de guerreiros selecionada é maior do que o seu número de aventureiros!\nDigite uma quantidade menor.")
+
+	print("\nEquipe pronta!\nVocê tem " + str(len(aventureiros)) + " aventureiros na sua equipe.")
+
+	#iniciar a partida com a fila de monstros aleatórios pro level 1
 
 def main():
 	print("\n/*/*/*/* JOGO DE EXPLORACAO DA MASMORRA */*/*/*/")
