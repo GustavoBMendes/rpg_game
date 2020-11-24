@@ -106,20 +106,27 @@ def print_aventureiros(aventureiros):
 def atk_warrior(aventureiros, monstros):
 	for avent in aventureiros:
 		if avent.classe == "warrior":
-			if avent.tipo_dano == monstros[0].reducao:
-				monstros[0].hp = monstros[0].hp - (avent.dano * monstros[0].porc_reducao)
-			else:
-				monstros[0].hp = monstros[0].hp - avent.dano
+			if len(monstros) >= 1:
+				if avent.tipo_dano == monstros[0].reducao:
+					monstros[0].hp = monstros[0].hp - (avent.dano * monstros[0].porc_reducao)
+				else:
+					monstros[0].hp = monstros[0].hp - avent.dano
 
-			if avent.tipo_dano == monstros[1].reducao:
-				monstros[1].hp = monstros[1].hp - (avent.dano * monstros[1].porc_reducao)
-			else:
-				monstros[1].hp = monstros[1].hp - avent.dano
+				if len(monstros) >= 2:
 
-			if monstros[1].hp <= 0:
-				del monstros[1]
-			if monstros[0].hp <= 0:
-				del monstros[0]
+					if avent.tipo_dano == monstros[1].reducao:
+						monstros[1].hp = monstros[1].hp - (avent.dano * monstros[1].porc_reducao)
+					else:
+						monstros[1].hp = monstros[1].hp - avent.dano
+
+					if monstros[1].hp <= 0:
+						del monstros[1]
+					if monstros[0].hp <= 0:
+						del monstros[0]
+
+				else:
+					if monstros[0].hp <= 0:
+						del monstros[0]
 
 			aventureiros.remove(avent)
 			return aventureiros, monstros
@@ -130,27 +137,40 @@ def atk_warrior(aventureiros, monstros):
 def atk_druid(aventureiros, monstros):
 	for avent in aventureiros:
 		if avent.classe == "druid":
-			if avent.tipo_dano == monstros[0].reducao:
-				monstros[0].hp = monstros[0].hp - (avent.dano * monstros[0].porc_reducao)
-			else:
-				monstros[0].hp = monstros[0].hp - avent.dano
+			if len(monstros) >= 1:
+				if avent.tipo_dano == monstros[0].reducao:
+					monstros[0].hp = monstros[0].hp - (avent.dano * monstros[0].porc_reducao)
+				else:
+					monstros[0].hp = monstros[0].hp - avent.dano
 
-			if avent.tipo_dano == monstros[1].reducao:
-				monstros[1].hp = monstros[1].hp - (avent.dano * monstros[1].porc_reducao)
-			else:
-				monstros[1].hp = monstros[1].hp - avent.dano
+				if len(monstros) >= 2:
 
-			if avent.tipo_dano == monstros[2].reducao:
-				monstros[2].hp = monstros[2].hp - (avent.dano * monstros[2].porc_reducao)
-			else:
-				monstros[2].hp = monstros[2].hp - avent.dano
+					if avent.tipo_dano == monstros[1].reducao:
+						monstros[1].hp = monstros[1].hp - (avent.dano * monstros[1].porc_reducao)
+					else:
+						monstros[1].hp = monstros[1].hp - avent.dano
 
-			if monstros[2].hp <= 0:
-				del monstros[2]
-			if monstros[1].hp <= 0:
-				del monstros[1]
-			if monstros[0].hp <= 0:
-				del monstros[0]
+					if len(monstros) >= 3:
+						if avent.tipo_dano == monstros[2].reducao:
+							monstros[2].hp = monstros[2].hp - (avent.dano * monstros[2].porc_reducao)
+						else:
+							monstros[2].hp = monstros[2].hp - avent.dano
+
+						if monstros[2].hp <= 0:
+							del monstros[2]
+						if monstros[1].hp <= 0:
+							del monstros[1]
+						if monstros[0].hp <= 0:
+							del monstros[0]
+					else:
+						if monstros[1].hp <= 0:
+							del monstros[1]
+						if monstros[0].hp <= 0:
+							del monstros[0]
+
+				else:
+					if monstros[0].hp <= 0:
+						del monstros[0]
 
 			aventureiros.remove(avent)
 			return aventureiros, monstros
@@ -161,34 +181,59 @@ def atk_druid(aventureiros, monstros):
 def atk_mage(aventureiros, monstros):
 	for avent in aventureiros:
 		if avent.classe == "mage":
-			if avent.tipo_dano == monstros[0].reducao:
-				monstros[0].hp = monstros[0].hp - (avent.dano * monstros[0].porc_reducao)
-			else:
-				monstros[0].hp = monstros[0].hp - avent.dano
+			if len(monstros) >= 1:
+				if avent.tipo_dano == monstros[0].reducao:
+					monstros[0].hp = monstros[0].hp - (avent.dano * monstros[0].porc_reducao)
+				else:
+					monstros[0].hp = monstros[0].hp - avent.dano
 
-			if avent.tipo_dano == monstros[1].reducao:
-				monstros[1].hp = monstros[1].hp - (avent.dano * monstros[1].porc_reducao)
-			else:
-				monstros[1].hp = monstros[1].hp - avent.dano
+				if len(monstros) >= 2:
+					if avent.tipo_dano == monstros[1].reducao:
+						monstros[1].hp = monstros[1].hp - (avent.dano * monstros[1].porc_reducao)
+					else:
+						monstros[1].hp = monstros[1].hp - avent.dano
 
-			if avent.tipo_dano == monstros[2].reducao:
-				monstros[2].hp = monstros[2].hp - (avent.dano * monstros[2].porc_reducao)
-			else:
-				monstros[2].hp = monstros[2].hp - avent.dano
+					if len(monstros) >= 3:
 
-			if avent.tipo_dano == monstros[3].reducao:
-				monstros[3].hp = monstros[3].hp - (avent.dano * monstros[3].porc_reducao)
-			else:
-				monstros[3].hp = monstros[3].hp - avent.dano
+						if avent.tipo_dano == monstros[2].reducao:
+							monstros[2].hp = monstros[2].hp - (avent.dano * monstros[2].porc_reducao)
+						else:
+							monstros[2].hp = monstros[2].hp - avent.dano
 
-			if monstros[3].hp <= 0:
-				del monstros[3]
-			if monstros[2].hp <= 0:
-				del monstros[2]
-			if monstros[1].hp <= 0:
-				del monstros[1]
-			if monstros[0].hp <= 0:
-				del monstros[0]
+						if len(monstros) >= 4:
+
+							if avent.tipo_dano == monstros[3].reducao:
+								monstros[3].hp = monstros[3].hp - (avent.dano * monstros[3].porc_reducao)
+							else:
+								monstros[3].hp = monstros[3].hp - avent.dano
+
+							if monstros[3].hp <= 0:
+								del monstros[3]
+							if monstros[2].hp <= 0:
+								del monstros[2]
+							if monstros[1].hp <= 0:
+								del monstros[1]
+							if monstros[0].hp <= 0:
+								del monstros[0]
+
+						else:
+
+							if monstros[2].hp <= 0:
+								del monstros[2]
+							if monstros[1].hp <= 0:
+								del monstros[1]
+							if monstros[0].hp <= 0:
+								del monstros[0]
+
+					else:
+						if monstros[1].hp <= 0:
+							del monstros[1]
+						if monstros[0].hp <= 0:
+							del monstros[0]
+
+				else:
+					if monstros[0].hp <= 0:
+						del monstros[0]
 
 			aventureiros.remove(avent)
 			return aventureiros, monstros
@@ -197,7 +242,7 @@ def atk_mage(aventureiros, monstros):
 	return aventureiros, monstros
 
 def rounds(aventureiros, monstros):
-	while len(aventureiros) > 0 or len(monstros) > 0:
+	while len(aventureiros) > 0 and len(monstros) > 0:
 		avent_atk = input("Qual aventureiro irá atacar? druid, mage ou warrior?")
 		if avent_atk == "warrior":
 			aventureiros, monstros = atk_warrior(aventureiros, monstros)
