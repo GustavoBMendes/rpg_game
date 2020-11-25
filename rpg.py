@@ -93,14 +93,34 @@ def gerar_monstros(lvl):
 
 	return monstros
 
-def print_monstros(monstros):
-	for monstro in monstros:
-		print(monstro.classe+" // Redução contra "+monstro.reducao+" // HP: "+str(monstro.hp))
+def print_monstros(monstros, flag):
+	if flag == 1:
+		for monstro in monstros:
+			print("\t" + monstro.classe+" // Redução contra "+monstro.reducao+" // HP: "+str(monstro.hp))
+	else:
+		for monstro in monstros:
+			print(monstro.classe+" // Redução contra "+monstro.reducao+" // HP: "+str(monstro.hp))
 	print()
 
-def print_aventureiros(aventureiros):
+def print_aventureiros(aventureiros, flag):
+	cont_druida = 0
+	cont_mage = 0
+	cont_warrior = 0
 	for avent in aventureiros:
-		print(avent.classe+" // Dano: "+str(avent.dano)+" // Elemento: "+avent.tipo_dano)
+		if avent.classe == "druid":
+			cont_druida += 1
+		elif avent.classe == "mage":
+			cont_mage += 1
+		else:
+			cont_warrior += 1
+	if flag == 1:
+		print("\tdruid // Dano: 5 // Elemento: veneno // quantidade: " + str(cont_druida))
+		print("\tmage // Dano:  4 // Elemento: magico // quantidade: " + str(cont_mage))
+		print("\twarrior // Dano:  6 // Elemento: fisico // quantidade: " + str(cont_warrior))	
+	else:
+		print("druid // Dano: 5 // Elemento: veneno // quantidade: " + str(cont_druida))
+		print("mage // Dano:  4 // Elemento: magico // quantidade: " + str(cont_mage))
+		print("warrior // Dano:  6 // Elemento: fisico // quantidade: " + str(cont_warrior))
 	print()
 
 def atk_warrior(aventureiros, monstros):
@@ -241,18 +261,23 @@ def atk_mage(aventureiros, monstros):
 	print("\nVocê não possui mais mages na sua equipe, escolha outra classe para atacar!\n")
 	return aventureiros, monstros
 
-def rounds(aventureiros, monstros):
+def rounds(aventureiros, monstros, cont_level):
+	cont_round = 1
 	while len(aventureiros) > 0 and len(monstros) > 0:
-		avent_atk = input("Qual aventureiro irá atacar? druid, mage ou warrior?")
+		print("\n+------------------------------------------------------------------+")
+		print("\t\t* LEVEL " +str(cont_level) + " - ROUND " + str(cont_round) + " *\n")
+		print_monstros(monstros,1)
+		print_aventureiros(aventureiros,1)
+		print("+------------------------------------------------------------------+\n")
+
+		avent_atk = input("Qual aventureiro irá atacar? druid, mage ou warrior? ")
 		if avent_atk == "warrior":
 			aventureiros, monstros = atk_warrior(aventureiros, monstros)
 		if avent_atk == "druid":
 			aventureiros, monstros = atk_druid(aventureiros, monstros)
 		if avent_atk == "mage":
 			aventureiros, monstros = atk_mage(aventureiros, monstros)
-
-		print_monstros(monstros)
-		print_aventureiros(aventureiros)
+		cont_round += 1
 
 	return aventureiros
 
@@ -260,23 +285,23 @@ def rounds(aventureiros, monstros):
 def jogo():
 
 	print("Monte sua equipe para derrotar os monstros da masmorra!\n")
-	print("Selecione a dificuldade:")
-	print("<1>Fácil 	(30 aventureiros)")
-	print("<2>Médio 	(18 aventureiros)")
-	print("<3>Difícil 	(09 aventureiros)")
-	print("<4>Sair do jogo =(")
+	print("\tSelecione a dificuldade:")
+	print("\t<1>Fácil 	(30 aventureiros)")
+	print("\t<2>Médio 	(18 aventureiros)")
+	print("\t<3>Difícil 	(09 aventureiros)")
+	print("\t<4>Sair do jogo =(")
 
 	dif = int(input("\nEscolha entre as dificuldades 1, 2 ou 3:\n> "))
 	num_aventureiros = 18
 
 	if dif == 1:
-		print("Dificuldade fácil escolhida!")
+		print("Dificuldade fácil escolhida!\n")
 		num_aventureiros = 30
 	elif dif == 2:
-		print("Dificuldade média escolhida!")
+		print("Dificuldade média escolhida!\n")
 		num_aventureiros = 18
 	elif dif == 3:
-		print("Dificuldade difícil escolhida!")
+		print("Dificuldade difícil escolhida!\n")
 		num_aventureiros = 9
 	elif dif == 4:
 		exit()
@@ -287,9 +312,9 @@ def jogo():
 	flag = 0
 
 	print('\nA seguir você irá escolher a quantidade de aventureiros para cada classe.')
-	print('Os druids causam 5 de dano veneno por ataque.')
-	print('Já os mages possuem 4 de dano mágico.')
-	print('Os guerreiros dão 6 de dano físico com seu ataque.\n')
+	print('- Os druids causam 5 de dano veneno por ataque.')
+	print('- Já os mages possuem 4 de dano mágico.')
+	print('- Os guerreiros dão 6 de dano físico com seu ataque.\n\n')
 	while flag == 0:
 		n_druids = int(input("Escolha a quantidade de druids da sua equipe: "))
 		if (num_aventureiros - n_druids) >= 0:
@@ -338,8 +363,8 @@ def jogo():
 		else:
 			print("Quantidade de guerreiros selecionada é maior do que o seu número de aventureiros!\nDigite uma quantidade menor.")
 
-	print("\nEquipe pronta!\nVocê tem " + str(len(aventureiros)) + " aventureiros na sua equipe.")
-	print_aventureiros(aventureiros)
+	print("\n\nEquipe pronta!\nVocê tem " + str(len(aventureiros)) + " aventureiros na sua equipe.")
+	print_aventureiros(aventureiros,0)
 
 	#iniciar a partida com a fila de monstros aleatórios pro level 1
 	monstros = []
@@ -347,8 +372,8 @@ def jogo():
 
 	while len(aventureiros) > 0:
 		monstros = gerar_monstros(lvl)
-		print_monstros(monstros)
-		aventureiros = rounds(aventureiros, monstros)
+		print_monstros(monstros,0)
+		aventureiros = rounds(aventureiros, monstros, lvl)
 		lvl += 1
 
 def main():
