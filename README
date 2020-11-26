@@ -1,0 +1,18 @@
+Este código se trata de um jogo de estilo rpg, baseado em níveis, onde em cada turno o jogador seleciona um aventureiro para atacar um grupo de monstros.
+Após cada turno, o aventureiro que realizou o ataque sai da equipe e os monstros atacados perdem pontos de vida, e caso os pontos de vida for menor ou igual a zero, o monstro é eliminado.
+O jogador avança de nível caso todos os monstros do nível atual forem eliminados. 
+O jogo acaba quando não houverem mais aventureiros na equipe.
+
+A dificuldade do jogo é baseada no número de aventureiros que o jogador escolhe para fazer parte da equipe dele, são 3 dificuldades disponíveis.
+-> Fácil: 9 aventureiros
+-> Médio: 18 aventureiros
+-> Difícil: 30 aventureiros
+
+O código foi escrito em Python, versão 3.8.5 e o gerenciador de pacotes pip na versão 20.2.3, com as seguintes dependências: random, time e colorama.
+
+Linha de comando para execução.
+Windows:
+> python rpg.py
+
+Linux:
+> python3 rpg.py
